@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Menarquita - Contacto</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <span class="logo">Menarquita</span>
+      <button class="logo-icon" id="logoIcon" type="button" aria-label="Abrir menú">MN</button>
+      <button class="toggle-btn" id="toggleBtn" type="button" aria-label="Alternar menú">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" pointer-events="none">
+          <path d="M15 18l-6-6 6-6" />
+        </svg>
+      </button>
+    </div>
+
+    <nav class="sidebar-nav" aria-label="Navegación principal">
+      <div class="nav-section-label">Principal</div>
+
+      <a class="nav-item" href="index.html">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="3" width="7" height="7" rx="1" />
+          <rect x="14" y="3" width="7" height="7" rx="1" />
+          <rect x="3" y="14" width="7" height="7" rx="1" />
+          <rect x="14" y="14" width="7" height="7" rx="1" />
+        </svg>
+        <span class="nav-label">Inicio</span>
+      </a>
+
+      <a class="nav-item" href="Mision.html">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 19V5a2 2 0 0 1 2-2h10l4 4v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z" />
+          <path d="M14 3v5h5" />
+          <path d="M8 13h8" />
+          <path d="M8 17h5" />
+        </svg>
+        <span class="nav-label">Misión</span>
+      </a>
+
+      <a class="nav-item" href="Vision.html">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7-10-7-10-7z" />
+          <circle cx="12" cy="12" r="3" />
+        </svg>
+        <span class="nav-label">Visión</span>
+      </a>
+
+      <a class="nav-item" href="menarquita.html">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+        </svg>
+        <span class="nav-label">Cotiza tu producto</span>
+      </a>
+
+      <a class="nav-item active" href="contacto.html" aria-current="page">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+        </svg>
+        <span class="nav-label">Contacto</span>
+      </a>
+    </nav>
+  </aside>
+
+  <div class="main">
+    <header class="topbar">
+      <div>
+        <p class="topbar-kicker"> Pide tu presupuesto sin compromiso</p>
+        <h1 class="page-title">Contacto</h1>
+      </div>
+      <div class="topbar-actions">
+        <button class="theme-toggle" id="themeToggle" type="button" aria-label="Activar modo oscuro" title="Cambiar tema">
+          <svg class="theme-icon theme-icon-moon" viewBox="0 0 24 24" fill="none" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 12.8A8.5 8.5 0 1 1 11.2 3a6.7 6.7 0 0 0 9.8 9.8z" />
+          </svg>
+          <svg class="theme-icon theme-icon-sun" viewBox="0 0 24 24" fill="none" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="4" />
+            <path d="M12 2v2" />
+            <path d="M12 20v2" />
+            <path d="m4.93 4.93 1.41 1.41" />
+            <path d="m17.66 17.66 1.41 1.41" />
+            <path d="M2 12h2" />
+            <path d="M20 12h2" />
+            <path d="m6.34 17.66-1.41 1.41" />
+            <path d="m19.07 4.93-1.41 1.41" />
+          </svg>
+        </button>
+        <a class="btn-primary" href="tel:+56959872662">Llamar ahora</a>
+      </div>
+    </header>
+
+    <main class="content">
+      <div class="page-shell contact-shell">
+        <section class="hero hero-contact">
+          <div class="hero-copy">
+            <p class="eyebrow">Cotiza tus productos personalizados</p>
+            <h2>Cuéntanos qué necesitas y te damos un precio al instante</h2>
+            <p>
+              Podemos ayudarte con chapitas, tazas sublimadas, poleras, cojines, regalos corporativos y mucho más. Trabajamos con pedidos individuales y en cantidad.
+            </p>
+            <div class="hero-actions">
+              <a class="cta-button" id="whatsappHeroLink" href="https://wa.me/56959872662?text=HHola%20Menarquita%2C%20quiero%20cotizar%20un%20producto." target="_blank" rel="noreferrer">Escribir por WhatsApp</a>
+              <a class="secondary-button" href="mailto:info@menarquita.cl?subject=Solicitud%20de%20p%C3%A1gina%20web">Enviar correo</a>
+            </div>
+          </div>
+
+          <figure class="hero-media">
+            <img src="img/menarquita.jpeg" alt="Logo de Menarquita" />
+          </figure>
+        </section>
+
+        <section class="stats-grid" aria-label="Resumen de atención">
+          <article class="stat-card">
+            <div class="stat-label">Respuesta</div>
+            <div class="stat-value">24 h</div>
+            <div class="stat-note">Te contactamos en menos de un día hábil.</div>
+          </article>
+          <article class="stat-card">
+            <div class="stat-label">Modalidades</div>
+            <div class="stat-value">Web y físico</div>
+            <div class="stat-note">retiros en tienda y envíos a domicilio</div>
+          </article>
+          <article class="stat-card">
+            <div class="stat-label">Cobertura</div>
+            <div class="stat-value">Chile</div>
+            <div class="stat-note">Atención remota para empresas y emprendedores.</div>
+          </article>
+        </section>
+
+        <section class="contact-layout">
+          <div class="panel">
+            <h2 class="panel-title">Formulario de contacto</h2>
+            <p class="panel-subtitle">
+              Déjanos tus datos y el tipo de proyecto. Al enviar, se abrirá un correo listo para mandarnos tu solicitud.
+            </p>
+
+            <form id="contactForm" class="contact-form">
+              <div class="field-grid">
+                <div class="field">
+                  <label for="nombre">Nombre completo</label>
+                  <input id="nombre" name="nombre" type="text" placeholder="Tu nombre" required />
+                </div>
+                <div class="field">
+                  <label for="empresa">Empresa o marca (opcional)</label>
+                  <input id="empresa" name="empresa" type="text" placeholder="Tu empresa o marca" />
+                </div>
+              </div>
+
+              <div class="field-grid">
+                <div class="field">
+                  <label for="correo">Correo electrónico</label>
+                  <input id="correo" name="correo" type="email" placeholder="tu@correo.com" required />
+                </div>
+                <div class="field">
+                  <label for="telefono">WhatsApp o teléfono</label>
+                  <input id="telefono" name="telefono" type="tel" placeholder="+56 9 XXXX XXXX" required />
+                </div>
+              </div>
+
+              <div class="field-grid">
+                <div class="field">
+                  <label for="tipo">Tipo de producto</label>
+                  <select id="tipo" name="tipo" required>
+                    <option value="" selected disabled>Selecciona una opción</option>
+                    <option>Chapitas</option>
+                    <option>Tazas sublimadas</option>
+                    <option>Poleras</option>
+                    <option>Cojines</option>
+                    <option>Regalos corporativos</option>
+                    <option>No estoy seguro</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label for="plazo">¿Cuándo lo necesitas?</label>
+                  <select id="plazo" name="plazo" required>
+                    <option value="" selected disabled>Selecciona un plazo</option>
+                    <option>Urgente: menos de 1 semana</option>
+                    <option>Normal: 1 a 2 semanas</option>
+                    <option>Sin apuro: más de 2 semanas</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="field-grid single">
+                <div class="field">
+                  <label for="presupuesto">Presupuesto aproximado</label>
+                  <select id="presupuesto" name="presupuesto" required>
+                    <option value="" selected disabled>Selecciona un rango</option>
+                    <option>Menos de CLP 5.000 (1 unidad)</option>
+                    <option>CLP 5.000 a CLP 30.000 (pack pequeño)</option>
+                    <option>CLP 30.000 a CLP 100.000 (pedido mediano)</option>
+                    <option>Más de CLP 100.000 (pedido mayor)</option>
+                    <option>Prefiero recibir una propuesta</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="field-grid single">
+                <div class="field">
+                  <label for="mensaje">Describe tu pedido</label>
+                  <textarea id="mensaje" name="mensaje" placeholder="Cantidad, diseño que tienes, colores, tamaño, fecha de entrega, etc." required></textarea>
+                </div>
+              </div>
+
+              <div class="form-status" id="formStatus" aria-live="polite"></div>
+
+              <div class="form-footer">
+                <p class="form-note">
+                  Si prefieres, también puedes escribirnos directamente por WhatsApp al +56 9 2870 6208 o responder el correo que se generará.
+                </p>
+                <div class="hero-actions">
+                  <button class="cta-button" type="submit">Enviar solicitud</button>
+                  <button class="secondary-button" type="button" id="copyButton">Copiar datos</button>
+                </div>
+              </div>
+            </form>
+          </div>
+
+          <aside class="side-stack">
+            <div class="info-card">
+              <h2>Qué recibes</h2>
+              <ul class="info-list">
+                <li>Cotización con precio por unidad y precio por cantidad.</li>
+                <li>Asesoría para elegir el producto y soporte más adecuado.</li>
+                <li>Confirmación de tiempo de producción y forma de entrega.</li>
+              </ul>
+            </div>
+
+            <div class="info-card">
+              <h2>Canales de contacto</h2>
+              <div class="contact-method">
+                <div class="method-row">
+                  <div class="method-label">Correo</div>
+                  <div class="method-value"><a href="mailto:menarquita@gmail.com">menarquita@gmail.com</a></div>
+                </div>
+                <div class="method-row">
+                  <div class="method-label">WhatsApp</div>
+                  <div class="method-value"><a href="https://wa.me/56928706208" target="_blank" rel="noreferrer">+56 9 2870 6208</a></div>
+                </div>
+                <div class="method-row">
+                  <div class="method-label">Horario</div>
+                  <div class="method-value">Lun a vie, 9:00 a 18:00</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="info-card">
+              <h2>Cómo trabajamos</h2>
+              <div class="workflow">
+                <div class="workflow-step">
+                  <div class="step-index">1</div>
+                  <div>
+                    <strong>Nos envías tu idea</strong>
+                    Dinos el producto, cantidad y si tienes diseño listo o necesitas ayuda.
+                  </div>
+                </div>
+                <div class="workflow-step">
+                  <div class="step-index">2</div>
+                  <div>
+                    <strong>Te enviamos la cotización</strong>
+                    Con precio, tiempo de producción y opciones disponibles.
+                  </div>
+                </div>
+                <div class="workflow-step">
+                  <div class="step-index">3</div>
+                  <div>
+                    <strong>Producimos y entregamos</strong>
+                    Elaboramos tu pedido con cuidado y lo coordinamos para la entrega.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </aside>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    const contactForm = document.getElementById('contactForm');
+    const formStatus = document.getElementById('formStatus');
+    const copyButton = document.getElementById('copyButton');
+    const contactEmail = 'menarquita@gmail.com';
+    const contactPhone = '+56 9 2870 6208';
+
+    const buildMessage = () => {
+      const nombre = document.getElementById('nombre').value.trim();
+      const empresa = document.getElementById('empresa').value.trim();
+      const correo = document.getElementById('correo').value.trim();
+      const telefono = document.getElementById('telefono').value.trim();
+      const tipo = document.getElementById('tipo').value;
+      const plazo = document.getElementById('plazo').value;
+      const presupuesto = document.getElementById('presupuesto').value;
+      const mensaje = document.getElementById('mensaje').value.trim();
+
+      return [
+        'Hola, quiero solicitar una página web.',
+        '',
+        `Nombre: ${nombre}`,
+        `Empresa: ${empresa || 'No indicada'}`,
+        `Correo: ${correo}`,
+        `Teléfono: ${telefono}`,
+        `Tipo de web: ${tipo}`,
+        `Tiempo estimado: ${plazo}`,
+        `Presupuesto: ${presupuesto}`,
+        '',
+        'Detalles del proyecto:',
+        mensaje,
+      ].join('\n');
+    };
+
+    contactForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+
+      const subject = `Solicitud de página web - ${document.getElementById('nombre').value.trim()}`;
+      const body = buildMessage();
+      const mailtoUrl = `mailto:${contactEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+      formStatus.textContent = 'Se abrió tu cliente de correo para enviar la solicitud.';
+      formStatus.classList.add('status-ok');
+      window.location.href = mailtoUrl;
+    });
+
+    copyButton.addEventListener('click', async () => {
+      const text = `${buildMessage()}\n\nCorreo destino: ${contactEmail}\nWhatsApp: ${contactPhone}`;
+      try {
+        await navigator.clipboard.writeText(text);
+        formStatus.textContent = 'Los datos del formulario se copiaron al portapapeles.';
+        formStatus.classList.add('status-ok');
+      } catch (error) {
+        formStatus.textContent = 'No se pudo copiar automáticamente. Revisa los datos y vuelve a intentarlo.';
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Menarquita- Sublimado y Chapitas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <span class="logo">Menarquita</span>
+      <button class="logo-icon" id="logoIcon" type="button" aria-label="Abrir menú">MN</button>
+      <button class="toggle-btn" id="toggleBtn" type="button" aria-label="Alternar menú">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" pointer-events="none">
+          <path d="M15 18l-6-6 6-6" />
+        </svg>
+      </button>
+    </div>
+
+    <nav class="sidebar-nav" aria-label="Navegación principal">
+      <div class="nav-section-label">Principal</div>
+
+      <a class="nav-item active" href="index.html" aria-current="page">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="3" width="7" height="7" rx="1" />
+          <rect x="14" y="3" width="7" height="7" rx="1" />
+          <rect x="3" y="14" width="7" height="7" rx="1" />
+          <rect x="14" y="14" width="7" height="7" rx="1" />
+        </svg>
+        <span class="nav-label">Inicio</span>
+      </a>
+
+      <a class="nav-item" href="Mision.html">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 19V5a2 2 0 0 1 2-2h10l4 4v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z" />
+          <path d="M14 3v5h5" />
+          <path d="M8 13h8" />
+          <path d="M8 17h5" />
+        </svg>
+        <span class="nav-label">Misión</span>
+      </a>
+
+      <a class="nav-item" href="Vision.html">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7-10-7-10-7z" />
+          <circle cx="12" cy="12" r="3" />
+        </svg>
+        <span class="nav-label">Visión</span>
+      </a>
+
+      <a class="nav-item" href="menarquita.html">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+        </svg>
+        <span class="nav-label">Cotiza tu producto</span>
+      </a>
+
+      <a class="nav-item" href="contacto.html">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+        </svg>
+        <span class="nav-label">Contacto</span>
+      </a>
+    </nav>
+  </aside>
+
+  <div class="main">
+    <header class="topbar">
+      <div>
+        <p class="topbar-kicker">Sublimado - Chapitas - Personalización</p>
+        <h1 class="page-title">Inicio</h1>
+      </div>
+      <div class="topbar-actions">
+        <button class="theme-toggle" id="themeToggle" type="button" aria-label="Activar modo oscuro" title="Cambiar tema">
+          <svg class="theme-icon theme-icon-moon" viewBox="0 0 24 24" fill="none" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 12.8A8.5 8.5 0 1 1 11.2 3a6.7 6.7 0 0 0 9.8 9.8z" />
+          </svg>
+          <svg class="theme-icon theme-icon-sun" viewBox="0 0 24 24" fill="none" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="4" />
+            <path d="M12 2v2" />
+            <path d="M12 20v2" />
+            <path d="m4.93 4.93 1.41 1.41" />
+            <path d="m17.66 17.66 1.41 1.41" />
+            <path d="M2 12h2" />
+            <path d="M20 12h2" />
+            <path d="m6.34 17.66-1.41 1.41" />
+            <path d="m19.07 4.93-1.41 1.41" />
+          </svg>
+        </button>
+        <button class="btn-primary" type="button" onclick="contactar()">Contáctanos</button>
+      </div>
+    </header>
+
+    <main class="content">
+      <div class="page-shell">
+        <section class="hero">
+          <div class="hero-copy">
+            <p class="eyebrow">Personalización en sublimado y más</p>
+            <h2>Tu diseño en cualquier superficie</h2>
+            <p>
+              Somos Menarquita, especializados en sublimado general, creación de chapitas, tazas, cojines, poleras y todo tipo de artículos personalizados. Llevamos tu imagen a donde quieras.
+            </p>
+            <div class="hero-actions">
+              <a class="cta-button" href="contacto.html">Solicitar una propuesta</a>
+              <a class="secondary-button" href="Mision.html">Conocer nuestra misión</a>
+            </div>
+          </div>
+
+          <figure class="hero-media">
+            <img src="img/menarquita.jpeg" alt="Logo de Menarquita" />
+          </figure>
+        </section>
+
+        <section class="cards-grid" aria-label="Servicios principales">
+          <article class="card">
+            <span class="card-index">01</span>
+            <h3>Sublimado General</h3>
+            <p>Tazas, poleras, cojines, planchas y más. Tu diseño en alta calidad sobre cualquier soporte.</p>
+          </article>
+
+          <article class="card">
+            <span class="card-index">02</span>
+            <h3>Chapitas Personalizadas</h3>
+            <p>Chapitas redondas, rectangulares o de formas especiales para eventos, regalos o promoción.</p>
+          </article>
+
+          <article class="card">
+            <span class="card-index">03</span>
+            <h3>Regalos y Souvenirs</h3>
+            <p>Artículos únicos para cumpleaños, empresas, colegios y eventos especiales.</p>
+          </article>
+        </section>
+
+        <section class="content-block">
+          <div class="section-heading">
+            <p class="section-kicker">Quiénes somos</p>
+            <h2>Creatividad y calidad en cada producto</h2>
+          </div>
+          <p>
+            Menarquita nace de la pasión por la personalización. Trabajamos con materiales de calidad y equipos de sublimación profesional para entregar productos únicos, con tiempos rápidos y atención cercana.
+          </p>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <div class="chatbot-container" id="chatbotContainer">
+    <button class="chatbot-toggle" id="chatbotToggle" type="button" aria-label="Abrir chat">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="chat-icon">
+        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+      </svg>
+    </button>
+
+    <div class="chat-window" id="chatWindow">
+      <div class="chat-header">
+        <h3>Asistente MJFC</h3>
+        <button class="chat-close" id="chatClose" type="button" aria-label="Cerrar chat">&times;</button>
+      </div>
+
+      <div class="chat-body" id="chatBody">
+        <div class="chat-message bot">
+          <p>¡Hola! Soy el asistente de MJFC Enterprise. Puedes elegir una opción rápida o escribir tu consulta.</p>
+        </div>
+      </div>
+
+      <div class="chat-options" id="chatOptions"></div>
+
+      <form class="chat-input-area" id="chatForm">
+        <input
+          type="text"
+          id="chatInput"
+          placeholder="Escribe tu pregunta aquí..."
+          autocomplete="off"
+          required
+        />
+        <button type="submit" id="chatSubmitBtn" aria-label="Enviar mensaje">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="22" y1="2" x2="11" y2="13" />
+            <polygon points="22 2 15 22 11 13 2 9 22 2" />
+          </svg>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

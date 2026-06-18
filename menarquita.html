@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Menarquita-cotizador</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<style>
+  :root {
+    --brown: #7c3aed;
+    --brown-light: #9d5ff5;
+    --gold: #ec4899;
+    --gold-light: #f9a8d4;
+    --cream: #fdf8ff;
+    --gray-light: #f3e8ff;
+    --gray: #d8b4fe;
+    --dark: #2e1065;
+    --text: #3b0764;
+    --white: #FFFFFF;
+    --red: #db2777;
+    --green: #27AE60;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  
+  body {
+    font-family: 'Georgia', serif;
+    background: var(--cream);
+    color: var(--text);
+    font-size: 14px;
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  .main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .content {
+    flex: 1;
+    overflow-y: auto;
+    padding-bottom: 80px;
+  }
+
+  /* HEADER */
+  .app-header {
+    background: var(--brown);
+    color: var(--white);
+    padding: 14px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  }
+  .app-header img { height: 42px; border-radius: 4px; background: white; padding: 2px; }
+  .app-header .title { flex: 1; }
+  .app-header h1 { font-size: 17px; font-weight: bold; letter-spacing: 1px; }
+  .app-header p { font-size: 11px; opacity: 0.8; font-style: italic; }
+  .section {
+    background: var(--white);
+    margin: 12px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 1px 4px rgba(92,61,30,0.12);
+  }
+  .section-header {
+    background: var(--brown);
+    color: var(--white);
+    padding: 10px 14px;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+  }
+  .section-body { padding: 14px; }
+
+  /* FORM FIELDS */
+  .field-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  .field-row.single { grid-template-columns: 1fr; }
+  .field-row.triple { grid-template-columns: 1fr 1fr 1fr; }
+
+  label {
+    font-size: 11px;
+    font-weight: bold;
+    color: var(--brown);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: block;
+    margin-bottom: 4px;
+  }
+  input, select, textarea {
+    width: 100%;
+    border: 1.5px solid var(--gray);
+    border-radius: 6px;
+    padding: 8px 10px;
+    font-size: 13px;
+    font-family: inherit;
+    color: var(--text);
+    background: var(--cream);
+    transition: border-color 0.2s;
+    -webkit-appearance: none;
+  }
+  input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: var(--gold);
+    background: white;
+  }
+  input[type="number"] { text-align: right; }
+
+  /* ITEMS TABLE */
+  .items-table { width: 100%; border-collapse: collapse; margin-bottom: 12px; }
+  .items-table th {
+    background: var(--gold);
+    color: var(--white);
+    font-size: 10px;
+    padding: 7px 5px;
+    text-align: center;
+    font-weight: bold;
+    letter-spacing: 0.3px;
+  }
+  .items-table td {
+    padding: 4px 3px;
+    border-bottom: 1px solid var(--gray-light);
+    vertical-align: middle;
+  }
+  .items-table tr:nth-child(even) td { background: var(--gray-light); }
+  .row-num {
+    text-align: center;
+    font-size: 11px;
+    color: var(--brown-light);
+    font-weight: bold;
+    width: 20px;
+  }
+  .items-table input {
+    border: 1px solid #DDD;
+    border-radius: 4px;
+    padding: 5px 4px;
+    font-size: 11px;
+    background: white;
+    width: 100%;
+  }
+  .items-table input:focus { border-color: var(--gold); }
+  .col-desc { min-width: 90px; }
+  .col-vano { width: 72px; }
+  .col-hojas { width: 40px; }
+  .col-hoja { width: 72px; }
+  .col-price { width: 70px; }
+
+  /* DELETE BTN */
+  .btn-del {
+    background: none;
+    border: none;
+    color: #CCC;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 2px 4px;
+    line-height: 1;
+  }
+  .btn-del:active { color: var(--red); }
+
+  /* ADD ROW BTN */
+  .btn-add-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: none;
+    border: 1.5px dashed var(--brown-light);
+    color: var(--brown-light);
+    border-radius: 6px;
+    padding: 8px 14px;
+    font-size: 12px;
+    cursor: pointer;
+    width: 100%;
+    justify-content: center;
+    font-family: inherit;
+    transition: all 0.2s;
+    margin-bottom: 6px;
+  }
+  .btn-add-row:active { background: var(--gray-light); }
+
+  /* RESUMEN */
+  .resumen-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+  .opcion-box {
+    border: 1.5px solid var(--brown);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .opcion-title {
+    background: var(--brown);
+    color: white;
+    font-size: 11px;
+    font-weight: bold;
+    padding: 7px 10px;
+    text-align: center;
+  }
+  .opcion-title-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    background: var(--brown);
+    color: white;
+    padding: 7px 10px;
+  }
+  .resumen-toggle {
+    border: 1px solid rgba(255,255,255,0.35);
+    border-radius: 12px;
+    font-size: 9px;
+    font-weight: bold;
+    padding: 3px 7px;
+    cursor: pointer;
+    font-family: inherit;
+    letter-spacing: 0.3px;
+  }
+  .resumen-toggle.on {
+    background: var(--green);
+    color: white;
+  }
+  .resumen-toggle.off {
+    background: var(--gray);
+    color: var(--brown-light);
+  }
+  .opcion-box.disabled {
+    opacity: 0.65;
+  }
+  .total-box.disabled .tv {
+    color: #D6C9B4;
+  }
+  .opcion-body { padding: 10px; }
+  .opcion-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    padding: 3px 0;
+    border-bottom: 1px solid var(--gray-light);
+  }
+  .opcion-row:last-child { border-bottom: none; }
+  .opcion-row .label { color: var(--brown-light); }
+  .opcion-row .value { font-weight: bold; }
+
+  .total-box {
+    background: var(--brown);
+    color: white;
+    border-radius: 8px;
+    padding: 12px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+  .total-box .tl { font-size: 11px; font-weight: bold; opacity: 0.85; letter-spacing: 0.5px; }
+  .total-box .tv { font-size: 18px; font-weight: bold; color: var(--gold-light); }
+
+  /* INSTALACION */
+  .inst-row {
+    display: grid;
+    grid-template-columns: 1fr 80px 60px;
+    gap: 8px;
+    align-items: center;
+    margin-bottom: 8px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--gray-light);
+  }
+  .inst-row:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+  .inst-label { font-size: 12px; }
+  .inst-note { font-size: 10px; color: var(--brown-light); }
+  .toggle-btn {
+    padding: 6px 0;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.2s;
+    font-family: inherit;
+  }
+  .toggle-btn.on { background: var(--green); color: white; }
+  .toggle-btn.off { background: var(--gray); color: var(--brown-light); }
+
+  /* EXPORT BTN */
+  .export-bar {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    background: white;
+    border-top: 2px solid var(--brown);
+    padding: 10px 12px;
+    display: flex;
+    gap: 8px;
+    z-index: 200;
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+  }
+  .btn-export {
+    flex: 1;
+    background: var(--brown);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 13px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    font-family: inherit;
+    letter-spacing: 0.5px;
+    transition: background 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+  }
+  .btn-export:active { background: var(--dark); }
+  .btn-export.secondary {
+    background: white;
+    color: var(--brown);
+    border: 2px solid var(--brown);
+    flex: 0 0 auto;
+    padding: 13px 16px;
+  }
+
+  /* NOTAS */
+  .notas-list {
+    list-style: none;
+    padding: 0;
+  }
+  .notas-list li {
+    font-size: 11px;
+    color: var(--brown-light);
+    padding: 4px 0 4px 14px;
+    position: relative;
+    border-bottom: 1px solid var(--gray-light);
+  }
+  .notas-list li:last-child { border-bottom: none; }
+  .notas-list li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+    font-weight: bold;
+  }
+
+  /* BADGE */
+  .badge {
+    display: inline-block;
+    background: var(--gold-light);
+    color: var(--dark);
+    border-radius: 10px;
+    font-size: 10px;
+    font-weight: bold;
+    padding: 2px 8px;
+    margin-left: 6px;
+  }
+
+  /* NUMERO COTIZACION */
+  .cot-num-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .cot-num-wrapper span {
+    font-size: 11px;
+    color: var(--brown-light);
+    white-space: nowrap;
+  }
+  .cot-num-wrapper input { flex: 1; }
+
+  @media (max-width: 400px) {
+    .resumen-grid { grid-template-columns: 1fr; }
+    .field-row.triple { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <span class="logo">Menarquita</span>
+      <button class="logo-icon" id="logoIcon" type="button" aria-label="Abrir menú">MN</button>
+      <button class="toggle-btn" id="toggleBtn" type="button" aria-label="Alternar menú">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" pointer-events="none">
+          <path d="M15 18l-6-6 6-6"/>
+        </svg>
+      </button>
+    </div>
+
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">Principal</div>
+
+      <a class="nav-item" href="index.html" aria-current="page">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="3" width="7" height="7" rx="1" />
+          <rect x="14" y="3" width="7" height="7" rx="1" />
+          <rect x="3" y="14" width="7" height="7" rx="1" />
+          <rect x="14" y="14" width="7" height="7" rx="1" />
+        </svg>
+        <span class="nav-label">Inicio</span>
+      </a>
+
+      <a class="nav-item" href="Mision.html">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 19V5a2 2 0 0 1 2-2h10l4 4v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z" />
+          <path d="M14 3v5h5" />
+          <path d="M8 13h8" />
+          <path d="M8 17h5" />
+        </svg>
+        <span class="nav-label">Misión</span>
+      </a>
+
+      <a class="nav-item" href="Vision.html">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7-10-7-10-7z" />
+          <circle cx="12" cy="12" r="3" />
+        </svg>
+        <span class="nav-label">Visión</span>
+      </a>
+
+      <a class="nav-item active" href="menarquita.html">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+        </svg>
+        <span class="nav-label">Cotiza tu producto</span>
+      </a>
+
+       <a class="nav-item" href="contacto.html">
+         <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+           <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+         </svg>
+         <span class="nav-label">Contacto</span>
+       </a>
+    </nav>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <div class="main">
+    <div class="content">
+
+<header class="app-header">
+  <img src="img/menarquita.jpeg" alt="Logo de Menarquita" />
+  <div class="title">
+    <h1>Menarquita</h1>
+    <p>Cotizador de Objetos Sublimados</p>
+  </div>
+  <span class="badge">v1.0</span>
+</header>
+
+<!-- DATOS CLIENTE -->
+<div class="section">
+  <div class="section-header">📋 Datos del Cliente</div>
+  <div class="section-body">
+    <div class="field-row">
+      <div>
+        <label>Nombre / Empresa</label>
+        <input type="text" id="nombre" placeholder="Nombre del cliente">
+      </div>
+      <div>
+        <label>RUT</label>
+        <input type="text" id="rut" placeholder="12.345.678-9">
+      </div>
+    </div>
+    <div class="field-row">
+      <div>
+        <label>Contacto</label>
+        <input type="text" id="contacto" placeholder="Nombre contacto">
+      </div>
+      <div>
+        <label>Teléfono</label>
+        <input type="tel" id="telefono" placeholder="+56 9 XXXX XXXX">
+      </div>
+    </div>
+    <div class="field-row single">
+      <div>
+        <label>Dirección</label>
+        <input type="text" id="direccion" placeholder="Calle, número, comuna">
+      </div>
+    </div>
+    <div class="field-row">
+      <div>
+        <label>Fecha</label>
+        <input type="date" id="fecha">
+      </div>
+      <div>
+        <label>N° Cotización</label>
+        <input type="number" id="ncotizacion" min="1" value="1">
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TABLA DE ÍTEMS -->
+<div class="section">
+  <div class="section-header">📦 Productos </div>
+  <div class="section-body">
+    <div style="overflow-x: auto; -webkit-overflow-scrolling: touch;">
+      <table class="items-table" id="itemsTable">
+        <thead>
+          <tr>
+            <th>N°</th>
+            <th class="col-desc">Producto</th>
+            <th class="col-vano">Tipo</th>
+            <th class="col-hojas">Cant.</th>
+            <th class="col-hoja">Precio<br>Unitario</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="itemsBody">
+        </tbody>
+      </table>
+    </div>
+    <button class="btn-add-row" onclick="addRow()">+ Agregar producto</button>
+  </div>
+</div>
+
+<!-- OPCIONALES -->
+<div class="section">
+  <div class="section-header">🎁 Opcionales</div>
+  <div class="section-body">
+    <div class="inst-row">
+      <div>
+        <div class="inst-label">Embalaje Premium</div>
+        <div class="inst-note">Caja personalizada + espuma protectora</div>
+      </div>
+      <input type="number" id="kit_precio" placeholder="$ 0" min="0" onchange="recalcular()">
+      <button class="toggle-btn off" id="kit_toggle" onclick="toggleInst('kit')">NO</button>
+    </div>
+    <div class="inst-row">
+      <div>
+        <div class="inst-label">Etiquetado</div>
+        <div class="inst-note">Etiquetas personalizadas por producto</div>
+      </div>
+      <input type="number" id="core_precio" placeholder="$ 0" min="0" onchange="recalcular()">
+      <button class="toggle-btn off" id="core_toggle" onclick="toggleInst('core')">NO</button>
+    </div>
+    <div class="inst-row">
+      <div>
+        <div class="inst-label">Envío</div>
+        <div class="inst-note">Costo de despacho a domicilio</div>
+      </div>
+      <input type="number" id="desp_precio" placeholder="$ 0" min="0" onchange="recalcular()">
+      <button class="toggle-btn off" id="desp_toggle" onclick="toggleInst('desp')">NO</button>
+    </div>
+  </div>
+</div>
+
+<!-- RESUMEN -->
+<div class="section">
+  <div class="section-header">💰 Resumen de Cotización</div>
+  <div class="section-body">
+    <div class="opcion-box">
+      <div class="opcion-title">Desglose de Costos</div>
+      <div class="opcion-body">
+        <div class="opcion-row"><span class="label">Subtotal original (s/ desc.)</span><span class="value" id="r1_original">/bin/sh</span></div>
+        <div class="opcion-row" id="descuento-row" style="display:none;"><span class="label discount-label">Descuento por mayor (-20%)</span><span class="value discount-label" id="r1_descuento">/bin/sh</span></div>
+        <div class="opcion-row"><span class="label">Subtotal productos</span><span class="value" id="r1_sub">/bin/sh</span></div>
+        <div class="opcion-row"><span class="label">Opcionales</span><span class="value" id="r1_kit">/bin/sh</span></div>
+      </div>
+    </div>
+    <div class="total-box" id="total1_box">
+      <div class="tl">TOTAL COTIZACIÓN</div>
+      <div class="tv" id="total1">/bin/sh</div>
+    </div>
+  </div>
+  </div>
+
+</div>
+
+<!-- NOTAS -->
+<div class="section">
+  <div class="section-header">📌 Condiciones y Notas</div>
+  <div class="section-body">
+    <ul class="notas-list">
+      <li>Cotización válida por 15 días hábiles desde la fecha de emisión.</li>
+      <li>Valores en pesos chilenos (CLP). Precios no incluyen IVA salvo indicación expresa.</li>
+      <li>Diseño y arte adicional tienen costo extra.</li>
+      <li>Colores disponibles: consultar con equipo de producción.</li>
+      <li>MJFC Enterprice verifica calidad de producción antes de envío.</li>
+      <li>Garantía de 12 meses contra defectos de impresión.</li>
+    </ul>
+    <p style="margin-top:10px; font-size:11px; color:var(--brown); font-weight:bold;">⏱ Tiempo de producción: 5-15 días hábiles</p>
+  </div>
+</div>
+
+<!-- EXPORT BAR -->
+<div class="export-bar">
+  <button class="btn-export secondary" onclick="limpiarForm()" title="Limpiar">🗑</button>
+  <button class="btn-export" onclick="exportarPDF()">📄 Exportar PDF</button>
+</div>
+
+<script src="scriptcoti.js"></script>
+
+    </div><!-- close content -->
+  </div><!-- close main -->
+
+  <script src="script.js"></script>
+</body>
+</html>
